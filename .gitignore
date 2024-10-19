@@ -136,3 +136,5 @@ dist
 /mysql/ibtmp1
 mysql/ib_logfile0
 mysql/ibdata1
+/mysql/ib_logfile0
+/mysql/ibdata1
