@@ -132,3 +132,7 @@ dist
 /.vs
 
 /mysql/mysql.sock
+/auto.cnf
+/mysql/ib_logfile0
+/mysql/ibdata1
+/mysql/ibtmp1
