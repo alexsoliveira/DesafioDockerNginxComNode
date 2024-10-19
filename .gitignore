@@ -134,7 +134,3 @@ dist
 /mysql/mysql.sock
 /auto.cnf
 /mysql/ibtmp1
-mysql/ibdata1
-/mysql/ibdata1
-mysql/ib_buffer_pool
-/mysql/ib_buffer_pool
