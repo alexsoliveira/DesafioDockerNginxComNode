@@ -4,8 +4,6 @@ WORKDIR /usr/src/app
 
 COPY . .
 
-RUN npm install express
-
 RUN ln -s public html
 
 ENV DOCKERIZE_VERSION v0.6.1
