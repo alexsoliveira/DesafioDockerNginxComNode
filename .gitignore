@@ -132,4 +132,4 @@ dist
 /.vs
 
 /mysql/mysql.sock
-/auto.cnf
+
