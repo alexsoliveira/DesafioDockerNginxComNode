@@ -2,9 +2,9 @@ FROM node:15
 
 WORKDIR /usr/src/app
 
-RUN npm install
-
 COPY . .
+
+RUN npm install
 
 RUN ln -s public html
 
