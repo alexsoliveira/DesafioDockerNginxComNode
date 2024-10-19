@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  node-app:
+    image: node-app:1.9
+    build:
+      context: ./node
+      dockerfile: Dockerfile
+    container_name: node-app    
+    ports:
+      - 3000:3000
+    networks:
+      - desafio-net
+    volumes:
+      - ./node:/usr/src/app
+    tty: true
+    depends_on:
+      - database      
+
+  nginx:
+    image: nginx:3.6
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx-proxy-reverse
+    restart: always
+    ports:
+      - 8082:80
+    networks:
+      - desafio-net
+  
+  database:
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    container_name: database
+    restart: always
+    tty: true
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=nodedb
+      - MYSQL_ROOT_PASSWORD=root      
+    networks:
+      - desafio-net    
+
+networks:
+  desafio-net:
+    driver: bridge
