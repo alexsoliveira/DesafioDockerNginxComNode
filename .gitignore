@@ -131,6 +131,4 @@ dist
 
 /.vs
 
-/mysql/mysql.sock
-
 /mysql
