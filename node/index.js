@@ -11,11 +11,26 @@ const mysql = require('mysql');
 const connection = mysql.createConnection(config);
 
 connection.connect((err) => {
-  if (err) {
-    console.error('Erro ao conectar ao banco de dados:', err.stack);
-    return;
-  }
-  console.log('Conectado ao banco de dados MySQL.');
+    if (err) {
+        console.error('Erro ao conectar ao banco de dados:', err.stack);
+        return;
+    }
+    console.log('Conectado ao banco de dados MySQL.');
+});
+
+const sql = `
+    CREATE TABLE IF NOT EXISTS people (
+      id int not null auto_increment,
+      name varchar(255),
+      primary key(id)
+    )
+  `;
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.error('Erro ao criar tabela:', err);
+      return res.status(500).send('Erro ao criar tabela');
+    }
+    res.send('Tabela people criada com sucesso');
 });
 
 app.use(express.json());
