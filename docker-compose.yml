@@ -6,7 +6,7 @@ services:
     build:
       context: ./node
       dockerfile: Dockerfile
-    container_name: node-app    
+    container_name: node-app     
     ports:
       - 3000:3000
     networks:
@@ -15,19 +15,23 @@ services:
       - ./node:/usr/src/app
     tty: true
     depends_on:
-      - database      
+      database:
+        condition: service_healthy      
 
   nginx:
     image: nginx:3.6
     build:
       context: ./nginx
       dockerfile: Dockerfile
-    container_name: nginx-proxy-reverse
+    container_name: nginx-proxy-reverse    
     restart: always
     ports:
       - 8082:80
     networks:
       - desafio-net
+    depends_on:
+      database:
+        condition: service_healthy 
   
   database:
     image: mysql:5.7
@@ -41,7 +45,12 @@ services:
       - MYSQL_DATABASE=nodedb
       - MYSQL_ROOT_PASSWORD=root      
     networks:
-      - desafio-net    
+      - desafio-net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
+      interval: 5s
+      timeout: 10s
+      retries: 3
 
 networks:
   desafio-net:
