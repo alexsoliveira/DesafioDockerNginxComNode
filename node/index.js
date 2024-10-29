@@ -10,13 +10,7 @@ const config = {
 const mysql = require('mysql');
 const connection = mysql.createConnection(config);
 
-connection.connect((err) => {
-    if (err) {
-        console.error('Erro ao conectar ao banco de dados:', err.stack);
-        return;
-    }
-    console.log('Conectado ao banco de dados MySQL.');
-});
+connection.connect();
 
 const sql = `
     CREATE TABLE IF NOT EXISTS people (
