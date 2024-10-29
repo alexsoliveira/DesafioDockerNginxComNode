@@ -20,13 +20,7 @@ const sql = `
     )
   `;
 
-connection.query(sql, (err) => {
-    if (err) {
-      console.error('Erro ao criar tabela:', err);
-      return;
-    }
-    console.log('Tabela people criada com sucesso');
-});
+connection.query(sql);
 
 app.use(express.json());
 
